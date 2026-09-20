@@ -27,7 +27,7 @@ const MainWorkspace: React.FC = () => {
   }
 
   return (
-    <div className="flex h-screen w-screen overflow-hidden bg-[#FAF9F7] text-[#18181B]">
+    <div className="flex h-screen w-screen overflow-hidden bg-[#FAF9F7] dark:bg-[#0a0a0b] text-[#18181B] dark:text-slate-100 transition-colors duration-200">
       {/* Sidebar Navigation */}
       <Sidebar />
 

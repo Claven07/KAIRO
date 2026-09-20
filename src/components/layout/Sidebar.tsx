@@ -40,32 +40,29 @@ export const Sidebar: React.FC = () => {
 
   return (
     <aside
-      className={`relative flex flex-col border-r border-black/[0.07] bg-[#FAF9F7] transition-[width] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] z-20 select-none ${
+      className={`relative flex flex-col border-r border-black/[0.07] dark:border-white/[0.08] bg-[#FAF9F7] dark:bg-[#0a0a0b] transition-[width,colors] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] z-20 select-none ${
         sidebarCollapsed ? 'w-[60px]' : 'w-[230px]'
       }`}
     >
       {/* Brand Header */}
-      <div className="h-14 flex items-center justify-between px-3.5 border-b border-black/[0.06] bg-[#FAF9F7]">
+      <div className="h-14 flex items-center justify-between px-3.5 border-b border-black/[0.06] dark:border-white/[0.08] bg-[#FAF9F7] dark:bg-[#0a0a0b]">
         <button
           onClick={() => navigateTo('landing')}
           className="flex items-center gap-2.5 text-left focus:outline-none group pressable"
           title="KAIRO (カイロ) — Landing"
         >
-          <div className="w-6 h-6 rounded bg-[#121316] flex items-center justify-center text-white text-[11px] font-mono font-semibold tracking-tighter shadow-2xs group-hover:bg-[#1D4ED8] transition-colors">
+          <div className="w-6 h-6 rounded bg-[#121316] dark:bg-[#fafafa] flex items-center justify-center text-white dark:text-[#0a0a0b] text-[11px] font-mono font-semibold tracking-tighter shadow-2xs group-hover:bg-[#1D4ED8] dark:group-hover:bg-[#e4e4e7] transition-colors">
             K
           </div>
           {!sidebarCollapsed && (
             <div className="flex flex-col min-w-0">
               <div className="flex items-center gap-1.5">
-                <span className="font-semibold tracking-tight text-[#121316] text-[13.5px]">
-                  KAIRO
-                </span>
-                <span className="text-[10px] text-slate-400 font-normal tracking-wide">
+                <span className="text-[10px] text-slate-400 dark:text-slate-500 font-normal tracking-wide">
                   カイロ
                 </span>
               </div>
-              <span className="text-[9px] text-slate-400 font-mono tracking-wider uppercase -mt-0.5">
-                ARASAKA · SIH26117
+              <span className="text-[9px] text-slate-400 dark:text-slate-600 font-mono tracking-wider uppercase -mt-0.5">
+                SIH26117
               </span>
             </div>
           )}
@@ -74,7 +71,7 @@ export const Sidebar: React.FC = () => {
         {!sidebarCollapsed && (
           <button
             onClick={toggleSidebar}
-            className="w-6 h-6 flex items-center justify-center rounded text-slate-400 hover:text-slate-800 hover:bg-black/[0.04] transition-colors pressable"
+            className="w-6 h-6 flex items-center justify-center rounded text-slate-400 dark:text-slate-500 hover:text-slate-800 dark:hover:text-slate-300 hover:bg-black/[0.04] dark:hover:bg-white/[0.05] transition-colors pressable"
             title="Collapse Sidebar"
             aria-label="Collapse Sidebar"
           >
@@ -84,10 +81,10 @@ export const Sidebar: React.FC = () => {
       </div>
 
       {sidebarCollapsed && (
-        <div className="py-2 flex justify-center border-b border-black/[0.05]">
+        <div className="py-2 flex justify-center border-b border-black/[0.05] dark:border-white/[0.06]">
           <button
             onClick={toggleSidebar}
-            className="w-6 h-6 flex items-center justify-center rounded text-slate-400 hover:text-slate-800 hover:bg-black/[0.04] transition-colors pressable"
+            className="w-6 h-6 flex items-center justify-center rounded text-slate-400 dark:text-slate-500 hover:text-slate-800 dark:hover:text-slate-300 hover:bg-black/[0.04] dark:hover:bg-white/[0.05] transition-colors pressable"
             title="Expand Sidebar"
             aria-label="Expand Sidebar"
           >
@@ -100,11 +97,11 @@ export const Sidebar: React.FC = () => {
       <div className="flex-1 py-2.5 px-2 space-y-0.5 overflow-y-auto">
         <div className="px-2 py-1 mb-0.5">
           {!sidebarCollapsed ? (
-            <span className="text-[10px] font-mono tracking-wider uppercase text-slate-400 font-medium">
+            <span className="text-[10px] font-mono tracking-wider uppercase text-slate-400 dark:text-slate-600 font-medium">
               Command Node
             </span>
           ) : (
-            <div className="w-4 h-0.5 bg-black/[0.08] mx-auto rounded-full" />
+            <div className="w-4 h-0.5 bg-black/[0.08] dark:bg-white/[0.1] mx-auto rounded-full" />
           )}
         </div>
 
@@ -117,14 +114,14 @@ export const Sidebar: React.FC = () => {
               onClick={() => navigateTo(item.tab)}
               className={`w-full flex items-center gap-2.5 px-2.5 py-2 rounded-control text-[12.5px] font-medium transition-colors group pressable relative ${
                 isActive
-                  ? 'bg-[#121316] text-white shadow-2xs'
-                  : 'text-slate-600 hover:text-[#121316] hover:bg-black/[0.035]'
+                  ? 'bg-[#121316] dark:bg-[#fafafa] text-white dark:text-[#0a0a0b] shadow-2xs'
+                  : 'text-slate-600 dark:text-slate-400 hover:text-[#121316] dark:hover:text-slate-200 hover:bg-black/[0.035] dark:hover:bg-white/[0.05]'
               }`}
               title={sidebarCollapsed ? `${item.label} (${item.jpLabel})` : undefined}
             >
               <Icon
                 className={`w-4 h-4 shrink-0 transition-colors ${
-                  isActive ? 'text-white' : 'text-slate-400 group-hover:text-slate-700'
+                  isActive ? 'text-white dark:text-[#0a0a0b]' : 'text-slate-400 dark:text-slate-600 group-hover:text-slate-700 dark:group-hover:text-slate-400'
                 }`}
               />
               {!sidebarCollapsed && (
@@ -135,8 +132,8 @@ export const Sidebar: React.FC = () => {
                       <span
                         className={`text-[9.5px] font-mono px-1.5 py-0.2 rounded ${
                           isActive
-                            ? 'bg-white/15 text-white'
-                            : 'bg-black/[0.04] text-slate-500'
+                            ? 'bg-white/15 dark:bg-black/15 text-white dark:text-[#0a0a0b]'
+                            : 'bg-black/[0.04] dark:bg-white/[0.06] text-slate-500 dark:text-slate-500'
                         }`}
                       >
                         {item.badge}
@@ -150,21 +147,21 @@ export const Sidebar: React.FC = () => {
         })}
 
         {/* Separator */}
-        <div className="pt-2 my-2 border-t border-black/[0.05]" />
+        <div className="pt-2 my-2 border-t border-black/[0.05] dark:border-white/[0.06]" />
 
         {/* Settings */}
         <button
           onClick={() => navigateTo('settings')}
           className={`w-full flex items-center gap-2.5 px-2.5 py-1.5 rounded-control text-[12.5px] font-medium transition-colors group pressable ${
             currentTab === 'settings'
-              ? 'bg-[#121316] text-white shadow-2xs'
-              : 'text-slate-600 hover:text-[#121316] hover:bg-black/[0.035]'
+              ? 'bg-[#121316] dark:bg-[#fafafa] text-white dark:text-[#0a0a0b] shadow-2xs'
+              : 'text-slate-600 dark:text-slate-400 hover:text-[#121316] dark:hover:text-slate-200 hover:bg-black/[0.035] dark:hover:bg-white/[0.05]'
           }`}
           title={sidebarCollapsed ? 'Settings / Config' : undefined}
         >
           <Settings
             className={`w-4 h-4 shrink-0 transition-colors ${
-              currentTab === 'settings' ? 'text-white' : 'text-slate-400 group-hover:text-slate-700'
+              currentTab === 'settings' ? 'text-white dark:text-[#0a0a0b]' : 'text-slate-400 dark:text-slate-600 group-hover:text-slate-700 dark:group-hover:text-slate-400'
             }`}
           />
           {!sidebarCollapsed && (
@@ -174,23 +171,23 @@ export const Sidebar: React.FC = () => {
       </div>
 
       {/* Sovereign Node Telemetry Footer */}
-      <div className="p-2.5 border-t border-black/[0.06] bg-[#FAF9F7]/95">
+      <div className="p-2.5 border-t border-black/[0.06] dark:border-white/[0.08] bg-[#FAF9F7]/95 dark:bg-[#0a0a0b]/95">
         {!sidebarCollapsed ? (
-          <div className="p-2 rounded-control bg-white border border-black/[0.06] shadow-2xs space-y-1.5">
+          <div className="p-2 rounded-control bg-white dark:bg-[#18181b] border border-black/[0.06] dark:border-white/[0.08] shadow-2xs space-y-1.5">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                <span className="text-[10px] font-mono font-semibold tracking-tight text-slate-800">
+                <span className="text-[10px] font-mono font-semibold tracking-tight text-slate-800 dark:text-slate-200">
                   AIR-GAPPED
                 </span>
               </div>
-              <span className="text-[9px] font-mono text-slate-400">
+              <span className="text-[9px] font-mono text-slate-400 dark:text-slate-600">
                 0.4ms
               </span>
             </div>
-            <div className="flex items-center justify-between text-[10px] text-slate-500 border-t border-black/[0.04] pt-1">
-              <span className="truncate font-medium text-slate-700">Omansh // OP-01</span>
-              <span className="font-mono text-[9px] text-[#1D4ED8]">SIH-PROD</span>
+            <div className="flex items-center justify-between text-[10px] text-slate-500 dark:text-slate-500 border-t border-black/[0.04] dark:border-white/[0.05] pt-1">
+              <span className="truncate font-medium text-slate-700 dark:text-slate-400">Omansh // OP-01</span>
+              <span className="font-mono text-[9px] text-[#1D4ED8] dark:text-slate-300">SIH-PROD</span>
             </div>
           </div>
         ) : (

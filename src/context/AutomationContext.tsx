@@ -57,6 +57,8 @@ interface AutomationContextType {
   showToast: (message: string, type?: 'success' | 'info' | 'warning') => void;
   sidebarCollapsed: boolean;
   toggleSidebar: () => void;
+  isDarkMode: boolean;
+  toggleDarkMode: () => void;
 }
 
 const AutomationContext = createContext<AutomationContextType | undefined>(undefined);
@@ -80,8 +82,35 @@ export const AutomationProvider: React.FC<{ children: ReactNode }> = ({ children
   const [metrics, setMetrics] = useState<MetricsSummary>(initialMetrics);
   const [toasts, setToasts] = useState<ToastState[]>([]);
   const [sidebarCollapsed, setSidebarCollapsed] = useState<boolean>(false);
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(() => {
+    // Check localStorage for saved preference
+    const saved = localStorage.getItem('kairo-dark-mode');
+    return saved === 'true';
+  });
 
   const toggleSidebar = () => setSidebarCollapsed(prev => !prev);
+
+  const toggleDarkMode = () => {
+    setIsDarkMode(prev => {
+      const newValue = !prev;
+      localStorage.setItem('kairo-dark-mode', String(newValue));
+      if (newValue) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+      return newValue;
+    });
+  };
+
+  // Apply dark mode on mount
+  React.useEffect(() => {
+    if (isDarkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, []);
 
   const showToast = (message: string, type: 'success' | 'info' | 'warning' = 'success') => {
     const id = Math.random().toString(36).substring(2, 9);
@@ -365,6 +394,8 @@ export const AutomationProvider: React.FC<{ children: ReactNode }> = ({ children
         showToast,
         sidebarCollapsed,
         toggleSidebar,
+        isDarkMode,
+        toggleDarkMode,
       }}
     >
       {children}
